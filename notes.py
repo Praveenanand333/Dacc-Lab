@@ -247,3 +247,13 @@ print("Confusion Matrix:\n", cm)
 data = {'category': ['A', 'B', 'C', 'A', 'B']}
 df = pd.DataFrame(data)
 one_hot_encoded = pd.get_dummies(df['category'], prefix='category')
+
+
+min_value = np.min(data)
+max_value = np.max(data)
+mean_value = np.mean(data)
+median_value = np.median(data)
+
+filtered_data = df.query('Age > 30 and Salary < 80000')
+age_threshold = 35
+filtered_data = df.query('Age > @age_threshold')
