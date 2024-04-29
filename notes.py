@@ -253,6 +253,7 @@ min_value = np.min(data)
 max_value = np.max(data)
 mean_value = np.mean(data)
 median_value = np.median(data)
+mode_value = data.mode()[0]
 
 filtered_data = df.query('Age > 30 and Salary < 80000')
 age_threshold = 35
