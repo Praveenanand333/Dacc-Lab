@@ -244,3 +244,6 @@ print("Confusion Matrix:\n", cm)
 
 
 
+data = {'category': ['A', 'B', 'C', 'A', 'B']}
+df = pd.DataFrame(data)
+one_hot_encoded = pd.get_dummies(df['category'], prefix='category')
