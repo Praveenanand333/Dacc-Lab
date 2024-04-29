@@ -3,14 +3,11 @@ import numpy as np
 import seaborn as sn
 from sklearn import datasets
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler,MinMaxScaler
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.preprocessing import StandardScaler,MinMaxScaler,PolynomialFeatures
+from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LinearRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from sklearn.tree import plot_tree
+from sklearn.tree import DecisionTreeClassifier,plot_tree
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix,mean_squared_error, r2_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.decomposition import PCA
 from sklearn.ensemble import RandomForestClassifier
@@ -215,7 +212,7 @@ pca = PCA(n_components=2)
 X_pca = pca.fit_transform(X)
 
 plt.figure(figsize=(8, 6))
-plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y, cmap=plt.cm.get_cmap('viridis', len(np.unique(y))), edgecolor='k')
+plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y, cmap='viridis', edgecolor='k')
 plt.title('PCA of Wine Dataset')
 plt.xlabel('Principal Component 1')
 plt.ylabel('Principal Component 2')
