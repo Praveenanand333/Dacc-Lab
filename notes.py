@@ -8,6 +8,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.tree import plot_tree
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.decomposition import PCA
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
 
 
 irisdf=pd.read_csv("iris.csv")
@@ -180,4 +188,62 @@ print(r2_score(y_test,y_pred))
 # sn.pairplot(irisdf, hue="Species", markers=["o", "s", "D"])
 # plt.plot(x,y,color='',lable='')
 # plt.scatter(x,y,color='',marker='',label='')
+
+#dec tree
+
+model = DecisionTreeClassifier(criterion='entropy')
+model.fit(X_train, y_train)
+y_pred=model.predict(X_test)
+cm = confusion_matrix(y_test,y_pred)
+print(cm)
+print(classification_report(y_test,y_pred))
+plt.figure(figsize=(12,8))
+plot_tree(model)
+
+#knn
+k = 3
+knn_model = KNeighborsClassifier(n_neighbors=k)
+knn_model.fit(X, y)
+new_data_point = np.array([[9, 20]]) 
+predicted_class = knn_model.predict(new_data_point)
+print("Predicted class:", predicted_class[0])
+
+
+#pca
+
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X)
+
+plt.figure(figsize=(8, 6))
+plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y, cmap=plt.cm.get_cmap('viridis', len(np.unique(y))), edgecolor='k')
+plt.title('PCA of Wine Dataset')
+plt.xlabel('Principal Component 1')
+plt.ylabel('Principal Component 2')
+plt.colorbar(label='Class')
+plt.grid(True)
+plt.show()
+
+#random forest
+
+random_forest_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
+random_forest_classifier.fit(X_train, y_train)
+y_pred = random_forest_classifier.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy:.2f}")
+print("Classification Report:\n", classification_report(y_test, y_pred))
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:\n", cm)
+
+#svm
+
+svm_classifier = SVC(kernel='linear', C=1.0)
+svm_classifier.fit(X_train, y_train)
+y_pred = svm_classifier.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy:.2f}")
+print("Classification Report:\n", classification_report(y_test, y_pred))
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:\n", cm)
+
+
 
